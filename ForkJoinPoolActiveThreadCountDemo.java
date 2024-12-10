@@ -3,14 +3,30 @@
 // Implementation of getActiveThreadCount()
 
 import java.util.ArrayList;
-        import java.util.List;
-        import java.util.concurrent.ForkJoinPool;
-        import java.util.concurrent.RecursiveAction;
+import java.util.List;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.RecursiveAction;
+
 class NewTask extends RecursiveAction
 {
     private long Load = 0;
 
-    public NewTask(long Load) { this.Load = Load; }
+    public NewTask(long Load) { this.Load = Load;
+    System.out.println("printed the number: " + Load);
+        var load = Load;
+        calculatePower (Load);
+    }
+
+    private long calculatePower(long load){
+        long ret = 0;
+
+        if(load<5){
+            double d = Math.pow(2,load);
+            System.out.println("power table of 2 is : " + d);
+        }
+
+        return ret;
+    }
 
     protected void compute()
     {
@@ -28,9 +44,9 @@ class NewTask extends RecursiveAction
     {
         // create subtasks
         List<NewTask> subtasks = new ArrayList<>();
-        NewTask subtask1 = new NewTask(this.Load / 2);
-        NewTask subtask2 = new NewTask(this.Load / 2);
-        NewTask subtask3 = new NewTask(this.Load / 2);
+        NewTask subtask1 = new NewTask(this.Load / 3);
+        NewTask subtask2 = new NewTask(this.Load / 3);
+        NewTask subtask3 = new NewTask(this.Load / 3);
 
         // to add the subtasks
         subtasks.add(subtask1);
@@ -56,7 +72,7 @@ public class ForkJoinPoolActiveThreadCountDemo {
         System.out.println("Number of active thread before invoking: "
                 + Pool.getActiveThreadCount());
 
-        NewTask t = new NewTask(500);
+        NewTask t = new NewTask(6);
 
         Pool.invoke(t);
 
