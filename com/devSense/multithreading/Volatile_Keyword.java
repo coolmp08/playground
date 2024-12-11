@@ -1,13 +1,19 @@
 package com.devSense.multithreading;
 
+
+//similar can be achieved by using synchronised instead of volatile.
+
 class SharedResource{
 
-    private volatile boolean flag = false ;
+    private boolean flag = false ;
 
-    public void setFlag(boolean flag) {
+    public synchronized void setFlag(boolean flag) {
         this.flag = flag;
     }
 
+    public synchronized boolean getFlag() {
+        return flag;
+    }
     public boolean isFlag() {
         return flag;
     }
@@ -36,7 +42,7 @@ public class Volatile_Keyword {
         //Thread2
         new Thread(() -> {
             System.out.println("Thread2 started");
-            while (!sharedResource.isFlag()){
+            while (!sharedResource.getFlag()){
                 //it will run until the flag value is true
 //                System.out.println("Inside while in thread 2 waiting for the flag to be set ");
             }
