@@ -1,7 +1,6 @@
 package com.devSense.arrays;
 
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
@@ -23,16 +22,22 @@ public class ArrayRepeatNtimesFindSumMaxSumSubArray {
 
     public static void main(String[] args) {
 
-        int k = 3;
-        int[] arr = {1, 2};
+        int k = 2;
+//        int[] arr = {1, 2};
+        int[] arr = {2, 3, -8, 7, -1, 2, 3};
         int n = arr.length;
         int x = n * k;
         System.out.println(x);
         int[] repeated = new int[x];
 
-        for (int i = 0; i < x; i++) {
-            repeated[i] = arr[i%n];
-        }
+        if (k > 1) {
+            for (int i = 0; i < x; i++) {
+                repeated[i] = arr[i % n];
+            }
+        }else
+            repeated = arr;
+
+
         System.out.println(Arrays.toString(repeated));
 
         int val = MaxSubArraySum.maxSubArraySum(repeated);
